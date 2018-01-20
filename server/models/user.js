@@ -42,8 +42,8 @@ UserSchema.statics.findByEmailAndPassw = function(email, password) {
   return User.findOne({ email }).then(user =>
     user
       ? new Promise((resolve, reject) =>
-          bcrypt.compare(password, user.password, (err, res) => res ? resolve(user) : reject()))
-      : Promise.reject()
+          bcrypt.compare(password, user.password, (err, res) => res ? resolve(user) : reject(err)))
+      : Promise.reject('!?')
   );
 }
 
