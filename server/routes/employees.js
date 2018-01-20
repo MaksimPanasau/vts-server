@@ -39,7 +39,7 @@ module.exports = function(app) {
   });
 
   app.put('/employees/:id', authenticate, roleAdmin, validateId, (req, res) => {
-    const body = _.pick(req.body, [ 'firstName', 'lastName', 'workingSince', 'groups', 'balance' ]);
+    const body = _.pick(req.body, [ 'email', 'firstName', 'lastName', 'workingSince', 'groups', 'balance' ]);
     Employee.findByIdAndUpdate(req.params.id, { $set: { ...body } }, { new: true })
       .then(employee => !employee ? notFound(res) : res.send({ employee }))
       .catch(err => error(res, err));

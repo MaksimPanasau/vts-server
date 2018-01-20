@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 
 const app = express();
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({ exposedHeaders: ['Content-Type', 'x-auth'] }));
 
 require('./routes/employees')(app);
 require('./routes/users')(app);
